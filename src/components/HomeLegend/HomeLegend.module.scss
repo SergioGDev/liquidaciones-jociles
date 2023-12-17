@@ -1,0 +1,13 @@
+.url {
+    color: #02520e;
+    text-shadow: 1px 1px 1px #02520e30;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.itemLista {
+    margin-bottom: 10px;
+}

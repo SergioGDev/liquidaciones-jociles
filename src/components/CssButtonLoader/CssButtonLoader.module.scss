@@ -1,0 +1,27 @@
+.csv-reader-input {
+  padding: 10px 0px;
+
+  label {
+    margin-right: 5px;
+    min-width: 250px;
+    display: inline-block
+  }
+
+  input {
+    width: 500px;
+
+    &::file-selector-button {
+    background-color: #dfdddd;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px 20px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-right: 16px;
+
+    &:hover {
+      background-color: #b2aeae;
+    }
+  }
+  }
+}
