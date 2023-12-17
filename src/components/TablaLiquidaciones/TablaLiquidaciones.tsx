@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./TablaLiquidaciones.module.scss";
 
 import { useTheme } from "@mui/material/styles";
@@ -6,7 +6,6 @@ import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
-import { visuallyHidden } from "@mui/utils";
 
 import {
   EnhancedTableProps,
@@ -163,7 +162,7 @@ const FilaTablaLiquidaciones = ({
   } = rowData;
 
   return (
-    <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+    <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>€
       <TableCell component="th" scope="row" sx={{ width: "200px" }}>
         {numeroPoliza}
       </TableCell>
@@ -252,6 +251,7 @@ const TablaLiquidaciones = ({
       page * rowsPerPage,
       page * rowsPerPage + rowsPerPage
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [order, orderBy, page, rowsPerPage]);
 
   return (
