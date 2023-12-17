@@ -1,3 +1,4 @@
+'use client'
 import { DialogReturnValue } from "@/components/ui/DialogUser/dialogUser.types";
 import { getHeadersIndex } from "@/helpers/helpers";
 import { ComparatorValue, KeyMap, Template } from "@/types/template.types";
