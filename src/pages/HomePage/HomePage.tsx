@@ -3,7 +3,7 @@ import React from "react";
 import CssButtonLoader from "@/components/CssButtonLoader";
 import DialogUser from "@/components/ui/DialogUser";
 import TablaLiquidaciones from "@/components/TablaLiquidaciones";
-import { useHomePage } from "./hooks/useHomePage";
+import useHomePage from "./hooks/useHomePage";
 
 import { Alert, Snackbar, Typography } from "@mui/material";
 import HomeLegend from "@/components/HomeLegend";
