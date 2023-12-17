@@ -30,12 +30,7 @@ const DialogUser = ({ onClose, open, file, headers = [] }: DialogProps) => {
   const [optionalMap, setOptionalMap] = useState<KeyMap>({});
   const [comparatorValue, setComparatorValue] =
     useState<ComparatorValue>("numeroPoliza");
-
-  useEffect(
-    () => enumToArray(Headers).forEach(({ key }) => (map[key] = "")),
-    []
-  );
-
+    
   const vSelects: {
     label: any;
     key: string;

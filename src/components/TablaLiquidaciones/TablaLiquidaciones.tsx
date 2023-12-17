@@ -147,9 +147,7 @@ const TablePaginationActions = (props: TablePaginationActionsProps) => {
 
 const FilaTablaLiquidaciones = ({
   rowData,
-  vOptionalColumns,
-  comparatorValue,
-  vPolizas,
+  vOptionalColumns
 }: FilaTablaLiquidacionesProps) => {
   const {
     numeroPoliza,
@@ -162,7 +160,7 @@ const FilaTablaLiquidaciones = ({
   } = rowData;
 
   return (
-    <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>€
+    <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
       <TableCell component="th" scope="row" sx={{ width: "200px" }}>
         {numeroPoliza}
       </TableCell>
@@ -223,9 +221,6 @@ const TablaLiquidaciones = ({
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
   const visibleRows = React.useMemo<RowData[]>(() => {
     const fullData = data.map(
