@@ -2,9 +2,8 @@ import { DialogReturnValue } from "@/components/ui/DialogUser/dialogUser.types";
 import { getHeadersIndex } from "@/helpers/helpers";
 import { ComparatorValue, KeyMap, Template } from "@/types/template.types";
 import { useState } from "react";
-import { getDate } from "../homePage.helpers";
 
-export const useHomePage = () => {
+const useHomePage = () => {
   // DATA
   const [data, setData] = useState<{
     matriz: Template[];
@@ -100,7 +99,9 @@ export const useHomePage = () => {
           ? row[optionalHeaderIndexMap["nif"].index]?.trim()
           : "",
         fecha: optionalKeys.includes("fecha")
-          ? row[optionalHeaderIndexMap["fecha"].index] ? getDate(row[optionalHeaderIndexMap["fecha"].index].trim()) : undefined
+          ? row[optionalHeaderIndexMap["fecha"].index]
+            ? getDate(row[optionalHeaderIndexMap["fecha"].index].trim())
+            : undefined
           : undefined,
       });
     });
@@ -120,6 +121,11 @@ export const useHomePage = () => {
     }));
   };
 
+  const getDate = (dateStr: string) => {
+    const split = dateStr.split("/");
+    return new Date(Number(split[2]), Number(split[1]) - 1, Number(split[0]));
+  };
+
   return {
     data,
     setData,
@@ -135,3 +141,5 @@ export const useHomePage = () => {
     setDialogSelected,
   };
 };
+
+export default useHomePage;
