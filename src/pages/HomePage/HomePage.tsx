@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./HomePage.module.scss";
 
 import CssButtonLoader from "@/components/CssButtonLoader";
 import DialogUser from "@/components/ui/DialogUser";
@@ -22,7 +21,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div className={styles.container}>
+      <div>
         <Typography variant="h3" sx={{ marginTop: 4, marginBottom: 2 }}>
           Gestión de liquidaciones
         </Typography>
