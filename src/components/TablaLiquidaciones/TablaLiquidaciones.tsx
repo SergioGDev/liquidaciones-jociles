@@ -235,13 +235,6 @@ const TablaLiquidaciones = ({
         } as RowData)
     );
     const orderedList = stableSort(fullData, getComparator(order, orderBy));
-    console.log({
-      page,
-      rowsPerPage,
-      orderedList,
-      from: page * rowsPerPage,
-      to: page * rowsPerPage + rowsPerPage,
-    });
     return orderedList.slice(
       page * rowsPerPage,
       page * rowsPerPage + rowsPerPage

@@ -16,8 +16,8 @@ const descendingComparator = <T>(a: T, b: T, orderBy: keyof T) => {
     return 0;
   }
 
-  const strA = (a[orderBy] as string).toLowerCase();
-  const strB = (b[orderBy] as string).toLowerCase();
+  const strA = (a[orderBy] as string) ? (a[orderBy] as string).toLowerCase() : '';
+  const strB = (b[orderBy] as string) ? (b[orderBy] as string).toLowerCase() : '';
 
   return strB < strA ? -1 : 1;
 };

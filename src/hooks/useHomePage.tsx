@@ -89,23 +89,27 @@ const useHomePage = () => {
     );
     const vTemplate: Template[] = [];
     const optionalKeys: string[] = Object.keys(optionalMap);
+    const rowLength = Object.keys(optionalHeaderIndexMap).length + Object.keys(headerIndexMap).length;
 
     rows.forEach((row: string[]) => {
-      vTemplate.push({
-        numeroRecibo: row[headerIndexMap["numeroRecibo"].index]?.trim(),
-        comision: row[headerIndexMap["comision"].index]?.trim(),
-        nombreCliente: row[headerIndexMap["nombreCliente"].index]?.trim(),
-        numeroPoliza: row[headerIndexMap["numeroPoliza"].index]?.trim(),
-        nif: optionalKeys.includes("nif")
-          ? row[optionalHeaderIndexMap["nif"].index]?.trim()
-          : "",
-        fecha: optionalKeys.includes("fecha")
-          ? row[optionalHeaderIndexMap["fecha"].index]
-            ? getDate(row[optionalHeaderIndexMap["fecha"].index].trim())
-            : undefined
-          : undefined,
-      });
+      if (row.length >= rowLength) {
+        vTemplate.push({
+          numeroRecibo: row[headerIndexMap["numeroRecibo"].index]?.trim(),
+          comision: row[headerIndexMap["comision"].index]?.trim(),
+          nombreCliente: row[headerIndexMap["nombreCliente"].index]?.trim(),
+          numeroPoliza: row[headerIndexMap["numeroPoliza"].index]?.trim(),
+          nif: optionalKeys.includes("nif")
+            ? row[optionalHeaderIndexMap["nif"].index]?.trim()
+            : "",
+          fecha: optionalKeys.includes("fecha")
+            ? row[optionalHeaderIndexMap["fecha"].index] !== undefined
+              ? getDate(row[optionalHeaderIndexMap["fecha"].index].trim())
+              : undefined
+            : undefined,
+        });
+      }
     });
+    
     setData((prev) => ({
       ...prev,
       matriz: vTemplate,
@@ -118,7 +122,7 @@ const useHomePage = () => {
     const headerIndex = headers.jociles.indexOf(header);
     setData((prev) => ({
       ...prev,
-      jociles: rows.map((row) => row[headerIndex].trim()),
+      jociles: rows.map((row) => row[headerIndex]?.trim()),
     }));
   };
 
