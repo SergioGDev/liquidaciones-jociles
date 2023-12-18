@@ -66,7 +66,11 @@ const TablaLiquidacionesHead = (props: EnhancedTableProps) => {
         )}
 
         <TableCell>
-          <TableSortLabel onClick={createSortHandler("existe")}>
+          <TableSortLabel
+            active={orderBy === 'existe'}
+            direction={orderBy === 'existe' ? order : "asc"}
+            onClick={createSortHandler("existe")}
+          >
             ¿Existe?
           </TableSortLabel>
         </TableCell>
@@ -147,7 +151,7 @@ const TablePaginationActions = (props: TablePaginationActionsProps) => {
 
 const FilaTablaLiquidaciones = ({
   rowData,
-  vOptionalColumns
+  vOptionalColumns,
 }: FilaTablaLiquidacionesProps) => {
   const {
     numeroPoliza,
@@ -177,7 +181,11 @@ const FilaTablaLiquidaciones = ({
       )}
 
       <TableCell align="right" sx={{ width: "100px" }}>
-        {Number.parseFloat(comision).toLocaleString('es-ES', {minimumFractionDigits: 2, maximumFractionDigits: 2})} €
+        {Number.parseFloat(comision).toLocaleString("es-ES", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}{" "}
+        €
       </TableCell>
 
       <TableCell>
@@ -239,7 +247,7 @@ const TablaLiquidaciones = ({
       page * rowsPerPage,
       page * rowsPerPage + rowsPerPage
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [order, orderBy, page, rowsPerPage]);
 
   return (

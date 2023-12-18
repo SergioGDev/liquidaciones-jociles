@@ -15,6 +15,9 @@ const descendingComparator = <T>(a: T, b: T, orderBy: keyof T) => {
     }
     return 0;
   }
+  if (orderBy === "existe") {
+    return (a[orderBy] as boolean) ? -1 : 1;
+  }
 
   const strA = (a[orderBy] as string) ? (a[orderBy] as string).toLowerCase() : '';
   const strB = (b[orderBy] as string) ? (b[orderBy] as string).toLowerCase() : '';
