@@ -19,8 +19,12 @@ const descendingComparator = <T>(a: T, b: T, orderBy: keyof T) => {
     return (a[orderBy] as boolean) ? -1 : 1;
   }
 
-  const strA = (a[orderBy] as string) ? (a[orderBy] as string).toLowerCase() : '';
-  const strB = (b[orderBy] as string) ? (b[orderBy] as string).toLowerCase() : '';
+  const strA = (a[orderBy] as string)
+    ? (a[orderBy] as string).toLowerCase()
+    : "";
+  const strB = (b[orderBy] as string)
+    ? (b[orderBy] as string).toLowerCase()
+    : "";
 
   return strB < strA ? -1 : 1;
 };
@@ -58,4 +62,15 @@ export const stableSort = (
     return a[1] - b[1];
   });
   return stabilizedThis.map((el) => el[0]);
+};
+
+export const parseComision = (comision: string) => {
+  return parseFloat(comision.replace(",", ".")).toLocaleString("es-ES", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+};
+
+export const getEnteroConPuntos = (parteEntera: string) => {
+  return Number.parseFloat(parteEntera).toLocaleString("es-ES");
 };

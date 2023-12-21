@@ -25,11 +25,18 @@ import {
   IconButton,
   Box,
   TableSortLabel,
+  Typography,
+  Card,
 } from "@mui/material";
 import { RowData, Template } from "@/types/template.types";
 import { headerCells } from "./tablaLiquidaciones.consts";
 import { FilaTablaLiquidacionesProps } from "./tablaLiquidaciones.types";
-import { Order, getComparator, stableSort } from "./tablaLiquidaciones.helper";
+import {
+  Order,
+  getComparator,
+  parseComision,
+  stableSort,
+} from "./tablaLiquidaciones.helper";
 
 const TablaLiquidacionesHead = (props: EnhancedTableProps) => {
   const { order, orderBy, rowCount, onRequestSort, vOptionalColumns } = props;
@@ -67,8 +74,8 @@ const TablaLiquidacionesHead = (props: EnhancedTableProps) => {
 
         <TableCell>
           <TableSortLabel
-            active={orderBy === 'existe'}
-            direction={orderBy === 'existe' ? order : "asc"}
+            active={orderBy === "existe"}
+            direction={orderBy === "existe" ? order : "asc"}
             onClick={createSortHandler("existe")}
           >
             ¿Existe?
@@ -163,6 +170,7 @@ const FilaTablaLiquidaciones = ({
     existe,
   } = rowData;
 
+  console.log(comision);
   return (
     <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
       <TableCell component="th" scope="row" sx={{ width: "200px" }}>
@@ -181,11 +189,7 @@ const FilaTablaLiquidaciones = ({
       )}
 
       <TableCell align="right" sx={{ width: "100px" }}>
-        {Number.parseFloat(comision).toLocaleString("es-ES", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}{" "}
-        €
+        {parseComision(comision)} €
       </TableCell>
 
       <TableCell>
@@ -250,6 +254,24 @@ const TablaLiquidaciones = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [order, orderBy, page, rowsPerPage]);
 
+  const getComisionTotal = () => {
+    let acc = 0;
+    data.forEach(({ numeroPoliza, numeroRecibo, comision }: Template) => {
+      if (
+        estaEnListado(
+          comparatorValue === "numeroPoliza" ? numeroPoliza : numeroRecibo
+        )
+      ) {
+        acc += parseFloat(comision.replace(",", "."));
+      }
+    });
+
+    return acc.toLocaleString("es-ES", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  };
+
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
@@ -297,6 +319,29 @@ const TablaLiquidaciones = ({
           </Table>
         </TableContainer>
       </Paper>
+
+      <Card sx={{ marginBottom: 5 }}>
+        <Typography
+          variant="h6"
+          sx={{
+            width: "100%",
+            textAlign: "center",
+            marginTop: 3,
+          }}
+        >
+          Comisión total a recibir:
+        </Typography>
+        <Typography
+          variant="h5"
+          sx={{
+            width: "100%",
+            textAlign: "center",
+            marginBottom: 3
+          }}
+        >
+          {getComisionTotal()} €
+        </Typography>
+      </Card>
     </Box>
   );
 };

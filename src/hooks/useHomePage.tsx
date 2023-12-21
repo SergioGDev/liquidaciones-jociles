@@ -90,7 +90,7 @@ const useHomePage = () => {
     const vTemplate: Template[] = [];
     const optionalKeys: string[] = Object.keys(optionalMap);
     const rowLength = Object.keys(optionalHeaderIndexMap).length + Object.keys(headerIndexMap).length;
-
+    
     rows.forEach((row: string[]) => {
       if (row.length >= rowLength) {
         vTemplate.push({
